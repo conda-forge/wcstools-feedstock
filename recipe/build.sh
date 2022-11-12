@@ -7,6 +7,7 @@
 #
 set -x
 
+
 bindir=$PREFIX/bin
 incdir=$PREFIX/include
 libdir=$PREFIX/lib
@@ -29,6 +30,9 @@ export CFLAGS="$CFLAGS -fPIC"
 #   - Build the static archive without compiling the programs
 #   - The static archive is omitted from the package
 pushd libwcs
+    # Get an updated config.sub and config.guess
+    cp $BUILD_PREFIX/share/gnuconfig/config.* .
+
     make -j${CPU_COUNT} \
         CC="$CC" \
         CFLAGS="$CFLAGS" \
